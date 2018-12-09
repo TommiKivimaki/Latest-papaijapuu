@@ -1,6 +1,18 @@
 #set("content") {
-<p>Some text for the index page body</p>
+<p>Latest Messages:</p>
+
+#if(messages) {
+<ul>
+  #for(message in messages) {
+  <li>#(message.message)</li>
+  }
+</ul>
+
+} else {
+<p>No messages to display</p>
 }
 
+
+} 
 #embed("base")
 

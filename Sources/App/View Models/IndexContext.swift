@@ -9,4 +9,5 @@ import Foundation
 
 struct IndexContext: Codable {
   let title = "Index page"
+  var messages: [Message]?
 }
