@@ -1,0 +1,6 @@
+#set("content") {
+<p>Some text for the index page body</p>
+}
+
+#embed("base")
+
