@@ -8,6 +8,6 @@
 import Foundation
 
 struct IndexContext: Codable {
-  let title = "Index page"
+  let title = "Latest"
   var messages: [Message]?
 }
