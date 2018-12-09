@@ -25,7 +25,8 @@ struct WebsiteController: RouteCollection {
   }
   
   func createMessageHandler(_ req: Request) throws -> Future<View> {
-    return try req.view().render("createComment")
+    let context = CreateMessageContext()
+    return try req.view().render("createComment", context)
   }
   
   func createMessagePostHandler(_ req: Request, data: CreateMessageData) throws -> Future<Response> {
@@ -42,3 +43,4 @@ struct CreateMessageData: Content {
   let message: String
   let csrfToken: String?
 }
+

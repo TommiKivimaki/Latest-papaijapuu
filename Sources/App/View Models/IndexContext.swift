@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct IndexContext: Codable {
+struct IndexContext: Encodable {
   let title = "Latest"
-  var messages: [Message]?
+  let messages: [Message]?
 }
