@@ -4,14 +4,13 @@
   
   <div class="form-group">
     <label for="message">Message</label>
-<!--    <input type="text" name="message" class="form-control" id="message" value="#message.message" />-->
 <input type="text" name="message" class="form-control" id="message" #if(editing){value="#(message.message)"}/>
   </div>
   
   #if(editing) {
-    <button type="submit" class="btn btn-primary">Update</button>
+    <button type="submit" class="btn btn-blue">Update</button>
   } else {
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-blue">Submit</button>
   }
   
 <form>

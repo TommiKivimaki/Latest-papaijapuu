@@ -9,8 +9,8 @@
 </ul>
 
 <form method="post" action="/messages/#(message.id)/delete">
-  <a class="btn btn-primary" href="/messages/#(message.id)/edit" role="button">Edit</a>&nbsp;
-  <input class="btn btn-danger" type="submit" value="Delete" />
+  <a class="btn btn-blue" href="/messages/#(message.id)/edit" role="button">Edit</a>
+  <input class="btn btn-red" type="submit" value="Delete" />
 </form>
 
 

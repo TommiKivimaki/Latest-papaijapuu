@@ -1,3 +1,76 @@
+.form-group {
+  padding-bottom: 1em;
+}
+
+/* Style anchors and inputs to have a same button style */
+
+a {
+  text-decoration: none;
+  font-size: 1em;
+  font-family: inherit;
+}
+
 .btn {
-  color: blue;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+  padding: 0.25em 1em;
+  font-size: 1em;
+  font-family: inherit;
+  cursor: auto;
+}
+
+/* Green */
+.btn-green {
+  border-color: #4CAF50;
+  color: green;
+}
+
+.btn-green:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Blue */
+.btn-blue {
+  border-color: #2196F3;
+  color: dodgerblue
+}
+
+.btn-blue:hover {
+  background: #2196F3;
+  color: white;
+}
+
+/* Orange */
+.btn-orange {
+  border-color: #ff9800;
+  color: orange;
+}
+
+.btn-orange:hover {
+  background: #ff9800;
+  color: white;
+}
+
+/* Red */
+.btn-red {
+  border-color: #f44336;
+  color: red
+}
+
+.btn-red:hover {
+  background: #f44336;
+  color: white;
+}
+
+/* Gray */
+.btn-gray {
+  border-color: #a7a7a7;
+  color: black;
+}
+
+.btn-gray:hover {
+  background: #a7a7a7;
 }
