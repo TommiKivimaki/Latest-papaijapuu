@@ -24,4 +24,5 @@ extension Message: Content {}
 // Conform to Fluent's Model
 extension Message: SQLiteModel {}
 extension Message: Migration {}
+extension Message: Parameter {}
 

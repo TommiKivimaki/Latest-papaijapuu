@@ -1,0 +1,28 @@
+#set("content") {
+<h4>Edit or delete a message</h4>
+
+#if(message) {
+<ul>
+  <li>
+    #(message.message)
+  </li>
+</ul>
+
+<form method="post" action="/messages/#(message.id)/delete">
+  <a class="btn btn-primary" href="/messages/#(message.id)/edit" role="button">Edit</a>&nbsp;
+  <input class="btn btn-danger" type="submit" value="Delete" />
+</form>
+
+
+} else {
+<p>No message to display</p>
+}
+
+
+
+
+}
+#embed("base")
+
+
+

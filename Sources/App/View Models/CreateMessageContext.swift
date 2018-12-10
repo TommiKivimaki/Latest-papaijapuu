@@ -10,4 +10,5 @@ import Vapor
 
 final class CreateMessageContext: Encodable {
   let title = "Create Message"
+  let editing = false // Flag to tell createMessage.leaf that this context is NOT for editing
 }

@@ -1,0 +1,21 @@
+#set("content") {
+
+<form method="post">
+  
+  <div class="form-group">
+    <label for="message">Message</label>
+<!--    <input type="text" name="message" class="form-control" id="message" value="#message.message" />-->
+<input type="text" name="message" class="form-control" id="message" #if(editing){value="#(message.message)"}/>
+  </div>
+  
+  #if(editing) {
+    <button type="submit" class="btn btn-primary">Edit</button>
+  } else {
+    <button type="submit" class="btn btn-primary">Submit</button>
+  }
+  
+<form>
+    
+    
+}
+#embed("base")

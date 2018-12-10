@@ -1,0 +1,21 @@
+#set("content") {
+<h4>Latest Messages to edit</h4>
+
+#if(messages) {
+<ul>
+  #for(message in messages) {
+  <li>
+  <a href="messages/#(message.id)">#(message.message)</a>
+  </li>
+  }
+</ul>
+
+} else {
+<p>No messages to display</p>
+}
+
+
+}
+#embed("base")
+
+
