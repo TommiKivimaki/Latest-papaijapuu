@@ -12,11 +12,12 @@ struct WebsiteController: RouteCollection {
   func boot(router: Router) throws {
     router.get(use: indexHandler)
     router.get("messages", "create", use: createMessageHandler)
-    router.post(CreateMessageData.self, at: "messages", "create", use: createMessagePostHandler)
+    router.post(CreateMessageData.self, at: "messages", "create", use: createMessagePostHandler)  // Automatically decodes content
     router.get("messages", use: allMessageHandler)
     router.get("messages", Message.parameter, use: singleMessageHandler)
     router.post("messages", Message.parameter, "delete", use: deleteMessageHandler)
     router.get("messages", Message.parameter, "edit", use: editMessageHandler)
+    router.post("messages", Message.parameter, "edit", use: editMessagePostHandler) // Needs to manually decode content
   }
   
   /// Index page. This will be embedded to a client site
@@ -64,11 +65,21 @@ struct WebsiteController: RouteCollection {
       .transform(to: req.redirect(to: "/messages"))
   }
 
-  /// Shows Edit message page using the createComment.leaf
+  /// Shows "Edit message" page using the createComment.leaf
   func editMessageHandler(_ req: Request) throws -> Future<View> {
     return try req.parameters.next(Message.self).flatMap(to: View.self) { message in
       let context = EditMessageContext(message: message)
       return try req.view().render("createMessage", context)
+    }
+  }
+  
+  /// Receives POST messages from "Edit message" page
+  func editMessagePostHandler(_ req: Request) throws -> Future<Response> {
+    return try flatMap(to: Response.self,
+                       req.parameters.next(Message.self),
+                       req.content.decode(CreateMessageData.self)) { originalMessage, data in
+                        originalMessage.message = data.message
+                        return originalMessage.save(on: req).transform(to: req.redirect(to: "/messages"))
     }
   }
   
