@@ -5,10 +5,8 @@
 //  Created by Tommi Kivimäki on 08/12/2018.
 //
 
-import Foundation
 import Vapor
-//import FluentPostgreSQL
-import FluentSQLite
+import FluentPostgreSQL
 
 final class Message: Codable {
   var id: Int?
@@ -19,10 +17,9 @@ final class Message: Codable {
   }
 }
 
-//extension Message: PostgreSQLModel {}
+extension Message: PostgreSQLModel {}
 extension Message: Content {}
 // Conform to Fluent's Model
-extension Message: SQLiteModel {}
 extension Message: Migration {}
 extension Message: Parameter {}
 

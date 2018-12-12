@@ -114,3 +114,12 @@ p {
   font-family: sans-serif;
   font-size: 1em;
 }
+
+/* Styling message list */
+
+ul {
+  list-style-type: none;
+  margin: 1em;
+  padding: 0;
+  font-family: sans-serif;
+}
