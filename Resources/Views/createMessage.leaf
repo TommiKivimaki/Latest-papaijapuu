@@ -3,7 +3,7 @@
 <form method="post">
   
   <div class="form-group">
-    <label for="message">Message</label>
+    <label class="form-label" for="message">Message</label>
 <input type="text" name="message" class="form-control" id="message" #if(editing){value="#(message.message)"}/>
   </div>
   

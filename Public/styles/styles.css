@@ -1,13 +1,42 @@
+/* Styling message creation form */
 .form-group {
   padding-bottom: 1em;
 }
 
-/* Style anchors and inputs to have a same button style */
+.form-label {
+  display: block;
+  font-family: sans-serif;
+  font-size: 1.2em;
+}
+
+input[type=text] {
+  font-family: sans-serif;
+  font-size: 1em;
+  width: 30%;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  border-radius: 4px;
+  transition: width 0.4s ease-in-out;
+  -webkit-transition: width 0.4s ease-in-out;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+}
+
+input[type=text]:focus {
+  width: 90%;
+  border-radius: 6px;
+  border: 1px solid #555
+}
+
+/* Styling buttons and links
+** Style anchors and inputs to have a same button style
+*/
 
 a {
   text-decoration: none;
   font-size: 1em;
-  font-family: inherit;
+  font-family: sans-serif;
 }
 
 .btn {
@@ -17,7 +46,7 @@ a {
   color: black;
   padding: 0.25em 1em;
   font-size: 1em;
-  font-family: inherit;
+  font-family: sans-serif;
   cursor: auto;
 }
 
@@ -34,12 +63,12 @@ a {
 
 /* Blue */
 .btn-blue {
-  border-color: #2196F3;
+  border-color: #2b8fd2;
   color: dodgerblue
 }
 
 .btn-blue:hover {
-  background: #2196F3;
+  background: #2b8fd2;
   color: white;
 }
 
@@ -73,4 +102,25 @@ a {
 
 .btn-gray:hover {
   background: #a7a7a7;
+}
+
+
+/* Styling the text */
+
+h1 {
+  font-family: sans-serif;
+  font-size: 1.5em;
+}
+
+p {
+  font-family: sans-serif;
+  font-size: 1em;
+}
+
+/* Styling a list of messages */
+ul {
+  font-family: sans-serif;
+  list-style-type: none;
+  margin: 1em;
+  padding: 0em;
 }

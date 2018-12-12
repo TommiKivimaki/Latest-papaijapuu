@@ -1,5 +1,5 @@
 #set("content") {
-<h4>Edit or delete a message</h4>
+<h1>Edit or delete a message</h1>
 
 #if(message) {
 <ul>

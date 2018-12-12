@@ -1,5 +1,5 @@
 #set("content") {
-<h4>Latest Messages to edit</h4>
+<h1>Latest Messages</h1>
 
 #if(messages) {
 <ul>
