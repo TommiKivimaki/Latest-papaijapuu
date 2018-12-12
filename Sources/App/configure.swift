@@ -1,12 +1,14 @@
 import FluentPostgreSQL
 import Vapor
 import Leaf
+import Authentication
 
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
   /// Register providers first
   try services.register(FluentPostgreSQLProvider())
   try services.register(LeafProvider())
+  try services.register(AuthenticationProvider())
   
   /// Register routes to the router
   let router = EngineRouter.default()
@@ -17,10 +19,11 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
   var middlewares = MiddlewareConfig() // Create _empty_ middleware config
   middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
   middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
+  middlewares.use(SessionsMiddleware.self)
   services.register(middlewares)
   
   
-  /// Configure and register a PostgreSQL database
+  /// Register the configured SQLite database to the database config.
   var databases = DatabasesConfig()
   let databaseName: String
   let databasePort: Int
@@ -35,8 +38,9 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     databaseName = Environment.get("DATABASE_DB") ?? "latest"
     databasePort = 5432
   }
-  // If get does not return a password we are running locally and the hardcoded password is used
+  // If get does not return a password we a running locally and the hardcoded password is used on on localhost.
   let hostname = Environment.get("DATABASE_HOSTNAME") ?? "localhost"
+  //  let hostname = Environment.get("DATABASE_HOSTNAME") ?? "postgres-test"
   let username = Environment.get("DATABASE_USER") ?? "latest-user"
   let password = Environment.get("DATABASE_PASSWORD") ?? "password"
   
@@ -49,10 +53,18 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
   var migrations = MigrationConfig()
   migrations.add(model: Message.self, database: .psql)
   migrations.add(model: User.self, database: .psql)
+  migrations.add(migration: AdminUser.self, database: .psql)
   services.register(migrations)
+  
+  /// Adds 'revert' and 'migrate' commands to config. 'revert' wipes the DB, 'migrate' creates tables
+  var commandConfig = CommandConfig.default()
+  commandConfig.useFluentCommands()
+  services.register(commandConfig)
   
   
   /// Configuring preferred Leaf renderer
   config.prefer(LeafRenderer.self, for: ViewRenderer.self)
+  // Key-Value cache that backs SessionMiddleware
+  config.prefer(MemoryKeyedCache.self, for: KeyedCache.self)
   
 }

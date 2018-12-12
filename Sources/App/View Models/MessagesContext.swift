@@ -10,4 +10,5 @@ import Foundation
 struct MessagesContext: Encodable {
   let title = "Latest Messages to edit"
   let messages: [Message]?
+  let userLoggedIn: Bool
 }

@@ -3,13 +3,46 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <link rel="stylesheet" href="/styles/styles.css"> 
-      <!--        <script src="main.js"></script> -->
-      
-      <title>#(title)</title>
-  </head>
+      <link rel="stylesheet" href="/styles/styles.css">
+        <!--        <script src="main.js"></script> -->
+        
+        <title>#(title)</title>
+        </head>
   
   <body>
+    
+    <!-- Don't show menu at index since it will be embedded -->
+    #if(title != "Latest") {
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Latest</a>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item #if(title == "Latest"){active}">
+            <a href="/" class="nav-link">Embedded View</a>
+          </li>
+          <li class="nav-item #if(title == "Latest Messages to edit"){active}">
+            <a href="/messages" class="nav-link">Messages</a>
+          </li>
+          <li class="nav-item #if(title == "Add Message"){active}">
+            <a href="/messages/create" class="nav-link">Add a Message</a>
+          </li>
+        </ul>
+        #if(userLoggedIn) {
+        <form class="form-inline" action="/logout" method="POST">
+          <input class="nav-link btn btn-red" type="submit" value="Log out">
+            </form>
+        }
+      </div>
+    </nav>
+    }
+    
     
     <div class="contentArea">
       #get(content)
