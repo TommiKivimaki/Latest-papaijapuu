@@ -13,21 +13,12 @@ struct MessagesController: RouteCollection {
   
   func boot(router: Router) throws {
     let messagesRoutes = router.grouped("api", "v1", "messages")
-    messagesRoutes.post(MessageCreateData.self, use: createHandler)
     
-//    let tokenAuthMiddleware = User.tokenAuthMiddleware()
-//    let guardAuthMiddleware = User.guardAuthMiddleware()
-//    let tokenAuthGroup = messagesRoutes.grouped(tokenAuthMiddleware, guardAuthMiddleware)
-//    tokenAuthGroup.get(use: getAllHandler)
-
-    
-    let basicAuthMiddleware = User.basicAuthMiddleware(using: BCryptDigest())
+    let tokenAuthMiddleware = User.tokenAuthMiddleware()
     let guardAuthMiddleware = User.guardAuthMiddleware()
-    let protected = messagesRoutes.grouped(basicAuthMiddleware, guardAuthMiddleware)
-    protected.get(use: getAllHandler)
-
-    
-    #warning("TODO: Protect the API routes")
+    let tokenAuthGroup = messagesRoutes.grouped(tokenAuthMiddleware, guardAuthMiddleware)
+    tokenAuthGroup.get(use: getAllHandler)
+    tokenAuthGroup.post(MessageCreateData.self, use: createHandler)
   }
   
   
@@ -37,6 +28,8 @@ struct MessagesController: RouteCollection {
   
   
   func createHandler(_ req: Request, data: MessageCreateData) throws -> Future<Message> {
+    let user = try req.requireAuthenticated(User.self)
+    #warning("user.requireID() should be saved to Message.userID, but linking User-Message is still missing")
     let message = Message(message: data.message)
     return message.save(on: req)
   }

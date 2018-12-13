@@ -8,8 +8,12 @@ struct UsersController: RouteCollection {
     
     let basicAuthMiddleware = User.basicAuthMiddleware(using: BCryptDigest())
     let basicAuthGroup = usersRoutes.grouped(basicAuthMiddleware)
-    basicAuthGroup.get(use: getAllHandler)
     basicAuthGroup.post("login", use: loginHandler)
+    
+    let tokenAuthMiddleware = User.tokenAuthMiddleware()
+    let guardAuthMiddleware = User.guardAuthMiddleware()
+    let tokenAuthGroup = usersRoutes.grouped(tokenAuthMiddleware, guardAuthMiddleware)
+    tokenAuthGroup.get(use: getAllHandler)
   }
   
   func getAllHandler(_ req: Request) throws -> Future<[User.Public]> {
@@ -21,6 +25,5 @@ struct UsersController: RouteCollection {
     let token = try Token.generate(for: user)
     return token.save(on: req)
   }
-  
   
 }
