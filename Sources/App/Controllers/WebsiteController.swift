@@ -25,6 +25,7 @@ struct WebsiteController: RouteCollection {
     authSessionRoutes.post("messages", Message.parameter, "edit", use: editMessagePostHandler) // Needs to manually decode content
     authSessionRoutes.get("login", use: loginHandler)
     authSessionRoutes.post(LoginPostData.self, at: "login", use: loginPostHandler)
+    authSessionRoutes.post("logout", use: logoutHandler)
     
     #warning("TODO: protected routes missing. Same thing for the API")
     
@@ -126,6 +127,12 @@ struct WebsiteController: RouteCollection {
         try req.authenticateSession(user)
         return req.redirect(to: "/messages")
     }
+  }
+  
+  /// Takes care of the logout POST request
+  func logoutHandler(_ req: Request) throws -> Response {
+    try req.unauthenticateSession(User.self)
+    return req.redirect(to: "/")
   }
   
 }
