@@ -10,4 +10,5 @@ import Foundation
 struct MessageContext: Encodable {
   let title: String
   let message: Message
+  let userLoggedIn: Bool
 }

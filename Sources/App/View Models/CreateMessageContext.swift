@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import Vapor
 
-final class CreateMessageContext: Encodable {
-  let title = "Create Message"
+struct CreateMessageContext: Encodable {
+  let title = "Add a Message"
   let editing = false // Flag to tell createMessage.leaf that this context is NOT for editing
+  let userLoggedIn: Bool
 }

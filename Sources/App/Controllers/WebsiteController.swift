@@ -15,19 +15,21 @@ struct WebsiteController: RouteCollection {
   func boot(router: Router) throws {
     router.get(use: indexHandler)
     
+    // Routes behind authSessionMiddleware() get the User
     let authSessionRoutes = router.grouped(User.authSessionsMiddleware())
-    authSessionRoutes.get("messages", "create", use: createMessageHandler)
-    authSessionRoutes.post(CreateMessageData.self, at: "messages", "create", use: createMessagePostHandler)  // Automatically decodes content
-    authSessionRoutes.get("messages", use: allMessageHandler)
-    authSessionRoutes.get("messages", Message.parameter, use: singleMessageHandler)
-    authSessionRoutes.post("messages", Message.parameter, "delete", use: deleteMessageHandler)
-    authSessionRoutes.get("messages", Message.parameter, "edit", use: editMessageHandler)
-    authSessionRoutes.post("messages", Message.parameter, "edit", use: editMessagePostHandler) // Needs to manually decode content
     authSessionRoutes.get("login", use: loginHandler)
     authSessionRoutes.post(LoginPostData.self, at: "login", use: loginPostHandler)
     authSessionRoutes.post("logout", use: logoutHandler)
     
-    #warning("TODO: protected routes missing. Same thing for the API")
+    // Protect routes. Can be accessed only if logged in
+    let protectedRoutes = authSessionRoutes.grouped(RedirectMiddleware<User>(path: "/login"))
+    protectedRoutes.get("messages", "create", use: createMessageHandler)
+    protectedRoutes.post(CreateMessageData.self, at: "messages", "create", use: createMessagePostHandler)  // Automatically decodes content
+    protectedRoutes.get("messages", use: allMessageHandler)
+    protectedRoutes.get("messages", Message.parameter, use: singleMessageHandler)
+    protectedRoutes.post("messages", Message.parameter, "delete", use: deleteMessageHandler)
+    protectedRoutes.get("messages", Message.parameter, "edit", use: editMessageHandler)
+    protectedRoutes.post("messages", Message.parameter, "edit", use: editMessagePostHandler) // Needs to manually decode content
     
 //    router.get(use: indexHandler)
 //    router.get("messages", "create", use: createMessageHandler)
@@ -52,7 +54,8 @@ struct WebsiteController: RouteCollection {
   
   /// Page to create messages
   func createMessageHandler(_ req: Request) throws -> Future<View> {
-    let context = CreateMessageContext()
+    let userLoggedIn = try req.isAuthenticated(User.self)
+    let context = CreateMessageContext(userLoggedIn: userLoggedIn)
     return try req.view().render("createMessage", context)
   }
   
@@ -75,8 +78,9 @@ struct WebsiteController: RouteCollection {
   
   /// Page to show a single message
   func singleMessageHandler(_ req: Request) throws -> Future<View> {
+    let userLoggedIn = try req.isAuthenticated(User.self)
     return try req.parameters.next(Message.self).flatMap(to: View.self) { message in
-      let context = MessageContext(title: "Edit message", message: message)
+      let context = MessageContext(title: "Edit message", message: message, userLoggedIn: userLoggedIn)
       return try req.view().render("message", context)
     }
   }

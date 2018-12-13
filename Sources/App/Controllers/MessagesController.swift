@@ -13,6 +13,8 @@ struct MessagesController: RouteCollection {
     let messagesRoute = router.grouped("api", "v1", "messages")
     messagesRoute.get(use: getAllHandler)
     messagesRoute.post(MessageCreateData.self, use: createHandler)
+    
+    #warning("TODO: Protect the API routes")
   }
   
   

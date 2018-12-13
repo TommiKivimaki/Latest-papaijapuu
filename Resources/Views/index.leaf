@@ -1,5 +1,4 @@
 #set("content") {
-<h1>Index -> Style this page to be embedded in an iFrame</h1>
 
 #if(messages) {
 <ul>

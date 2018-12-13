@@ -8,9 +8,9 @@
   </div>
   
   #if(editing) {
-    <button type="submit" class="btn btn-blue">Update</button>
+    <button type="submit" class="btn btn-primary">Update</button>
   } else {
-    <button type="submit" class="btn btn-blue">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
   }
   
 <form>

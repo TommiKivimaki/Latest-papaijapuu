@@ -1,107 +1,22 @@
-/* Styling message creation form */
-.form-group {
-  padding-bottom: 1em;
+/* Overall padding for all content except navigation */
+.contentArea {
+  padding: 1em;
 }
 
-.form-label {
-  display: block;
-  font-family: sans-serif;
+/* Style the login screen content */
+.loginContent {
+  width: 50%;
 }
 
-/*input[type=text] {*/
-.message-input {
-  font-family: sans-serif;
-  width: 30%;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  padding: 0.5em;
-  border-radius: 4px;
-  transition: width 0.4s ease-in-out;
-  -webkit-transition: width 0.4s ease-in-out;
-  border: 1px solid #bbb;
-  box-sizing: border-box;
+@media only screen and (max-width: 320px) {
+  .loginContent {
+    width: 100%;
+  }
 }
-
-/*input[type=text]:focus {*/
-.message-input {
-  width: 90%;
-  border-radius: 6px;
-  border: 1px solid #555
-}
-
-/* Styling buttons and links
-** Style anchors and inputs to have a same button style
-*/
-
-a {
-  text-decoration: none;
-  font-size: 1em;
-  font-family: sans-serif;
-}
-
-.btn {
-  border: 2px solid black;
-  border-radius: 4px;
-  background-color: white;
-  color: black;
-  padding: 0.25em 1em;
-  font-size: 1em;
-  font-family: sans-serif;
-  cursor: auto;
-}
-
-/* Green */
-.btn-green {
-  border-color: #4CAF50;
-  color: green;
-}
-
-.btn-green:hover {
-  background-color: #4CAF50;
-  color: white;
-}
-
-/* Blue */
-.btn-blue {
-  border-color: #2b8fd2;
-  color: dodgerblue
-}
-
-.btn-blue:hover {
-  background: #2b8fd2;
-  color: white;
-}
-
-/* Orange */
-.btn-orange {
-  border-color: #ff9800;
-  color: orange;
-}
-
-.btn-orange:hover {
-  background: #ff9800;
-  color: white;
-}
-
-/* Red */
-.btn-red {
-  border-color: #f44336;
-  color: red
-}
-
-.btn-red:hover {
-  background: #f44336;
-  color: white;
-}
-
-/* Gray */
-.btn-gray {
-  border-color: #a7a7a7;
-  color: black;
-}
-
-.btn-gray:hover {
-  background: #a7a7a7;
+@media only screen and (max-width: 640px) {
+  .loginContent {
+    width: 75%;
+  }
 }
 
 
@@ -125,3 +40,74 @@ ul {
   padding: 0;
   font-family: sans-serif;
 }
+
+
+/*.latest-btn {*/
+/*  margin-top: 1em;*/
+/*  margin-bottom: 1em;*/
+/*  border: 2px solid black;*/
+/*  border-radius: 4px;*/
+/*  background-color: white;*/
+/*  color: black;*/
+/*  padding: 0.25em 1em;*/
+/*  font-size: 1em;*/
+/*  font-family: sans-serif;*/
+/*  cursor: auto;*/
+/*}*/
+
+/* Green */
+/*.btn-green {*/
+/*  border-color: #4CAF50;*/
+/*  color: green;*/
+/*}*/
+
+/*.btn-green:hover {*/
+/*  background-color: #4CAF50;*/
+/*  color: white;*/
+/*}*/
+
+/* Blue */
+/*.latest-btn-blue {*/
+/*  border-color: #2b8fd2;*/
+/*  color: dodgerblue*/
+/*}*/
+/**/
+/*.latest-btn-blue:hover {*/
+/*  background: #2b8fd2;*/
+/*  color: white;*/
+/*}*/
+
+/* Orange */
+/*.btn-orange {*/
+/*  border-color: #ff9800;*/
+/*  color: orange;*/
+/*}*/
+
+/*.btn-orange:hover {*/
+/*  background: #ff9800;*/
+/*  color: white;*/
+/*}*/
+
+/* Red */
+/*.btn-red {*/
+/*  border-color: #f44336;*/
+/*  color: red*/
+/*}*/
+
+/*.btn-red:hover {*/
+/*  background: #f44336;*/
+/*  color: white;*/
+/*}*/
+
+/* Gray */
+/*.btn-gray {*/
+/*  border-color: #a7a7a7;*/
+/*  color: black;*/
+/*}*/
+
+/*.btn-gray:hover {*/
+/*  background: #a7a7a7;*/
+/*}*/
+
+
+
