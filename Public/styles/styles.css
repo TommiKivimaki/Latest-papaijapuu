@@ -5,20 +5,18 @@
 
 /* Style the login screen content */
 .loginContent {
-  width: 50%;
+  max-width: 100%;
 }
-
-@media only screen and (max-width: 320px) {
+@media only screen and (min-width: 480px) {
   .loginContent {
-    width: 100%;
+    max-width: 50%;
   }
 }
-@media only screen and (max-width: 640px) {
+@media only screen and (min-width: 720px) {
   .loginContent {
-    width: 75%;
+    max-width: 30%;
   }
 }
-
 
 /* Styling the text */
 

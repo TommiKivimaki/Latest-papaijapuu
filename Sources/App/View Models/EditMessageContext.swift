@@ -11,4 +11,5 @@ struct EditMessageContext: Encodable {
   let title = "Edit Message"
   let message: Message
   let editing = true // Flag to tell createMessage.leaf that this context is for editing
+  let userLoggedIn: Bool
 }

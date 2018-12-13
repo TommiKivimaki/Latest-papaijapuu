@@ -93,8 +93,9 @@ struct WebsiteController: RouteCollection {
 
   /// Shows "Edit message" page using the createComment.leaf
   func editMessageHandler(_ req: Request) throws -> Future<View> {
+    let userLoggedIn = try req.isAuthenticated(User.self)
     return try req.parameters.next(Message.self).flatMap(to: View.self) { message in
-      let context = EditMessageContext(message: message)
+      let context = EditMessageContext(message: message, userLoggedIn: userLoggedIn)
       return try req.view().render("createMessage", context)
     }
   }
