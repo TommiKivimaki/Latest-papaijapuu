@@ -7,12 +7,25 @@
 
 import Vapor
 import Fluent
+import Authentication
 
 struct MessagesController: RouteCollection {
+  
   func boot(router: Router) throws {
-    let messagesRoute = router.grouped("api", "v1", "messages")
-    messagesRoute.get(use: getAllHandler)
-    messagesRoute.post(MessageCreateData.self, use: createHandler)
+    let messagesRoutes = router.grouped("api", "v1", "messages")
+    messagesRoutes.post(MessageCreateData.self, use: createHandler)
+    
+//    let tokenAuthMiddleware = User.tokenAuthMiddleware()
+//    let guardAuthMiddleware = User.guardAuthMiddleware()
+//    let tokenAuthGroup = messagesRoutes.grouped(tokenAuthMiddleware, guardAuthMiddleware)
+//    tokenAuthGroup.get(use: getAllHandler)
+
+    
+    let basicAuthMiddleware = User.basicAuthMiddleware(using: BCryptDigest())
+    let guardAuthMiddleware = User.guardAuthMiddleware()
+    let protected = messagesRoutes.grouped(basicAuthMiddleware, guardAuthMiddleware)
+    protected.get(use: getAllHandler)
+
     
     #warning("TODO: Protect the API routes")
   }

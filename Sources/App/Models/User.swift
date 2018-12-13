@@ -64,6 +64,9 @@ extension User: BasicAuthenticatable {
 }
 extension User: PasswordAuthenticatable {}
 extension User: SessionAuthenticatable {}
+extension User: TokenAuthenticatable {
+  typealias TokenType = Token
+}
 
 
 // Permanent admin user
