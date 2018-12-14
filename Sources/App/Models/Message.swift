@@ -17,6 +17,11 @@ final class Message: Codable {
   }
 }
 
+extension Message: Equatable {
+  static func == (lhs: Message, rhs: Message) -> Bool {
+    return lhs.message == rhs.message
+  }
+}
 extension Message: PostgreSQLModel {}
 extension Message: Content {}
 // Conform to Fluent's Model

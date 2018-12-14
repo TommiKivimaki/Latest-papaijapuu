@@ -17,14 +17,16 @@ struct UsersController: RouteCollection {
     tokenAuthGroup.get("logout", use: logoutHandler)
   }
   
+  /// Returns all users
   func getAllHandler(_ req: Request) throws -> Future<[User.Public]> {
     return User.query(on: req).decode(data: User.Public.self).all()
   }
   
+  /// Deletes a user's token if it exists and creates a new one
   func loginHandler(_ req: Request) throws -> Future<Token> {
     let user = try req.requireAuthenticated(User.self)
-    //    let token = try Token.generate(for: user)
-    //    return token.save(on: req)
+    //        let token = try Token.generate(for: user)
+    //        return token.save(on: req)
     return try Token
       .query(on: req)
       .filter(\Token.userID, .equal, user.requireID())
@@ -35,7 +37,7 @@ struct UsersController: RouteCollection {
     }
   }
   
-  /// Log out user by deleting the bearer token from the table
+  /// Logs out a user by deleting the bearer token from the table
   func logoutHandler(_ req: Request) throws -> Future<HTTPResponse> {
     let user = try req.requireAuthenticated(User.self)
     return try Token

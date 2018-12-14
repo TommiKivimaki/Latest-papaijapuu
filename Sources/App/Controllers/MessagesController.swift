@@ -28,8 +28,8 @@ struct MessagesController: RouteCollection {
   
   
   func createHandler(_ req: Request, data: MessageCreateData) throws -> Future<Message> {
-    let user = try req.requireAuthenticated(User.self)
-    #warning("user.requireID() should be saved to Message.userID, but linking User-Message is still missing")
+    let _ = try req.requireAuthenticated(User.self)
+//    #warning("user.requireID() should be saved to Message.userID, but linking User-Message is still missing")
     let message = Message(message: data.message)
     return message.save(on: req)
   }

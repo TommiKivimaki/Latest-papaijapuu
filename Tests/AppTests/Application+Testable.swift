@@ -23,12 +23,12 @@ extension Application {
   
   // Resets database
   static func reset() throws {
-    let revertEnvironment = ["vapor", "revert", "--all", "-y"]
+    let revertEnvironment = ["postgres-for-latest-test", "revert", "--all", "-y"]
     try Application.testable(envArgs: revertEnvironment)
       .asyncRun()
       .wait()
     
-    let migrateEnvironment = ["vapor", "migrate", "-y"]
+    let migrateEnvironment = ["postgres-for-latest-test", "migrate", "-y"]
     try Application.testable(envArgs: migrateEnvironment)
       .asyncRun()
       .wait()
@@ -50,7 +50,7 @@ extension Application {
       if let user = loggedInUser {
         username = user.username
       } else {
-        username = "realadmin"
+        username = "admin"
       }
       
       // Create credentials
@@ -60,7 +60,7 @@ extension Application {
       tokenHeaders.basicAuthorization = credentials
       
       // Send the request to login
-      let tokenResponse = try self.sendRequest(to: "api/users/login", method: .POST, headers: tokenHeaders)
+      let tokenResponse = try self.sendRequest(to: "api/v1/users/login", method: .POST, headers: tokenHeaders)
       // Decode token from the response
       let token = try tokenResponse.content.syncDecode(Token.self)
       // Add the token to the authorization header we are trying to send.

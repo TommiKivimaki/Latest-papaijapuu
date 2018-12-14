@@ -1,0 +1,16 @@
+version: '3'
+services:
+  latest:
+    depends_on:
+      - postgres-for-latest-test
+    build: .
+    environment:
+      - DATABASE_HOSTNAME=postgres
+      - DATABASE_PORT=5432
+  postgres:
+    image: "postgres"
+#    container_name: postgres
+    environment:
+      - POSTGRES_DB=latest
+      - POSTGRES_USER=latest-user
+      - POSTGRES_PASSWORD=password
