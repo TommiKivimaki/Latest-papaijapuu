@@ -14,6 +14,7 @@ struct UsersController: RouteCollection {
     let guardAuthMiddleware = User.guardAuthMiddleware()
     let tokenAuthGroup = usersRoutes.grouped(tokenAuthMiddleware, guardAuthMiddleware)
     tokenAuthGroup.get(use: getAllHandler)
+    tokenAuthGroup.get("logout", use: logoutHandler)
   }
   
   func getAllHandler(_ req: Request) throws -> Future<[User.Public]> {
@@ -22,8 +23,26 @@ struct UsersController: RouteCollection {
   
   func loginHandler(_ req: Request) throws -> Future<Token> {
     let user = try req.requireAuthenticated(User.self)
-    let token = try Token.generate(for: user)
-    return token.save(on: req)
+    //    let token = try Token.generate(for: user)
+    //    return token.save(on: req)
+    return try Token
+      .query(on: req)
+      .filter(\Token.userID, .equal, user.requireID())
+      .delete()
+      .flatMap(to: Token.self) {
+        let token = try Token.generate(for: user)
+        return token.save(on: req)
+    }
+  }
+  
+  /// Log out user by deleting the bearer token from the table
+  func logoutHandler(_ req: Request) throws -> Future<HTTPResponse> {
+    let user = try req.requireAuthenticated(User.self)
+    return try Token
+      .query(on: req)
+      .filter(\Token.userID, .equal, user.requireID())
+      .delete()
+      .transform(to: HTTPResponse(status: .ok))
   }
   
 }
