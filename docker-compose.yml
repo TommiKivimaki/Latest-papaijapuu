@@ -5,9 +5,10 @@ services:
       - postgres-for-latest-test
     build: .
     environment:
-      - DATABASE_HOSTNAME=postgres
+      - DATABASE_HOSTNAME=postgres-for-latest-test
       - DATABASE_PORT=5432
-  postgres:
+      - LATESTSECRET=hurraa
+  postgres-for-latest-test:
     image: "postgres"
 #    container_name: postgres
     environment:

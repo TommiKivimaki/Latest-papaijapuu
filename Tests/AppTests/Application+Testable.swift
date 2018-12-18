@@ -54,7 +54,9 @@ extension Application {
       }
       
       // Create credentials
-      let credentials = BasicAuthorization(username: username, password: "password")
+//      let credentials = BasicAuthorization(username: username, password: "password")
+      guard let latestSecret = Environment.get("LATESTSECRET") else { fatalError("User credentials missing") }
+      let credentials = BasicAuthorization(username: username, password: latestSecret)
       // Create header for authentication
       var tokenHeaders = HTTPHeaders()
       tokenHeaders.basicAuthorization = credentials
