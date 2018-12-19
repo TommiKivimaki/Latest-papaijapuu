@@ -5,3 +5,5 @@ xcuserdata
 DerivedData/
 .DS_Store
 *.env
+Package.resolved
+docker-compose.yml

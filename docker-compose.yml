@@ -7,7 +7,6 @@ services:
     environment:
       - DATABASE_HOSTNAME=postgres-for-latest-test
       - DATABASE_PORT=5432
-      - LATESTSECRET=hurraa
   postgres-for-latest-test:
     image: "postgres"
 #    container_name: postgres
