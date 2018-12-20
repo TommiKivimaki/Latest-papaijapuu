@@ -1,16 +1,19 @@
 #set("content") {
 
-#if(messages) {
-<ul>
-  #for(message in messages) {
-  <li>#(message.message)</li>
+<div class="indexContentArea">
+  
+  #if(messages) {
+  <ul>
+    #for(message in messages) {
+    <li>#(message.message)</li>
+    }
+  </ul>
+  
+  } else {
+  <!-- Nothing to display here -->
   }
-</ul>
-
-} else {
-<!-- Nothing to display here -->
-}
-
+  
+</div>
 
 } 
 #embed("base")

@@ -1,6 +1,12 @@
 /* Overall padding for all content except navigation */
 .contentArea {
-  padding: 1em;
+  padding: 0.5em;
+}
+
+/* Styling the index page content, which is inside the .contentArea */
+.indexContentArea {
+  background-color: #48098C;
+  color: #ffffff;
 }
 
 /* Style the login screen content */
