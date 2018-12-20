@@ -10,8 +10,8 @@ function sendHeight() {
   let indexMessageList = document.getElementById("indexMessageList")
   
   if (indexMessageList !== null && indexMessageList !== undefined) {
-    let elementHeight = indexMessageList.clientHeight
-    let message = {height: elementHeight}
+    let bodyHeight = document.body.scrollHeight
+    let message = {height: bodyHeight}
     parent.postMessage(message,"*")
   }
   //  let docHeight = Math.max(
