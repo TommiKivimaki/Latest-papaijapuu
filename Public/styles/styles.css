@@ -5,8 +5,11 @@
 
 /* Styling the index page content, which is inside the .contentArea */
 .indexContentArea {
-  background-color: #48098C;
-  color: #ffffff;
+  background-color: #ebd9ff;
+  color: #48098c;
+  font-size: 1.2rem;
+  font-weight: 400;
+  border-radius: 6px;
 }
 
 /* Style the login screen content */
