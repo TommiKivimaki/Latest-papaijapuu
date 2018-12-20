@@ -13,7 +13,7 @@
 }
 
 /* Styling the message list shown on index page */
-.indexMessageList {
+#indexMessageList {
   padding-left: 0.5em;
   padding-right: 0.5em;
 }
