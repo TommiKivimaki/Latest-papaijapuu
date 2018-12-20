@@ -3,7 +3,7 @@
 <div class="indexContentArea">
   
   #if(messages) {
-  <ul>
+  <ul id="indexMessageList">
     #for(message in messages) {
     <li>#(message.message)</li>
     }
