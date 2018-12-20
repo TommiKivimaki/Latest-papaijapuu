@@ -12,6 +12,12 @@
   border-radius: 6px;
 }
 
+/* Styling the message list shown on index page */
+.indexMessageList {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
 /* Style the login screen content */
 .loginContent {
   max-width: 100%;
