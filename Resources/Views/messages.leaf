@@ -5,7 +5,7 @@
 <ul>
   #for(message in messages) {
   <li>
-  <a href="messages/#(message.id)">#(message.message)</a>
+    <a href="messages/#(message.id)">#(message.message)</a>
   </li>
   }
 </ul>
