@@ -63,6 +63,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
   migrations.add(model: User.self, database: .psql)
   migrations.add(model: Token.self, database: .psql)
   migrations.add(migration: AdminUser.self, database: .psql)
+  migrations.add(migration: AddTimestampToMessage.self, database: .psql)
   services.register(migrations)
   
   /// Adds 'revert' and 'migrate' commands to config. 'revert' wipes the DB, 'migrate' creates tables

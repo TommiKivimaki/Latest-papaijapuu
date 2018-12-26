@@ -45,10 +45,13 @@ struct WebsiteController: RouteCollection {
   
   /// Index page. This will be embedded to a client site
   func indexHandler(_ req: Request) throws -> Future<View> {
-    return Message.query(on: req).all().flatMap(to: View.self) { messages in
-      let messageData = messages.isEmpty ? nil : messages
-      let context = IndexContext(messages: messageData)
-      return try req.view().render("index", context)
+    return Message.query(on: req)
+      .sort(\.timestamp, .descending)
+      .all()
+      .flatMap(to: View.self) { messages in
+        let messageData = messages.isEmpty ? nil : messages
+        let context = IndexContext(messages: messageData)
+        return try req.view().render("index", context)
     }
   }
   
@@ -61,7 +64,8 @@ struct WebsiteController: RouteCollection {
   
   /// Handles the POST data from a page used to create messages
   func createMessagePostHandler(_ req: Request, data: CreateMessageData) throws -> Future<Response> {
-    let message = Message(message: data.message)
+//    let message = Message(message: data.message)  // Was like this before a migration to add a timestamp
+    let message = Message(message: data.message, timestamp: Date.init())
     let redirect = req.redirect(to: "/messages")
     return message.save(on: req).transform(to: redirect)
   }
@@ -69,7 +73,10 @@ struct WebsiteController: RouteCollection {
   /// Messages page shows messages with links to edit individual messages
   func allMessageHandler(_ req: Request) throws -> Future<View> {
     let userLoggedIn = try req.isAuthenticated(User.self)
-    return Message.query(on: req).all().flatMap(to: View.self) { messages in
+    return Message.query(on: req)
+      .sort(\.timestamp, .descending)
+      .all()
+      .flatMap(to: View.self) { messages in // Like this before timestamp migration
       let messageData = messages.isEmpty ? nil : messages
       let context = MessagesContext(messages: messageData, userLoggedIn: userLoggedIn)
       return try req.view().render("messages", context)
