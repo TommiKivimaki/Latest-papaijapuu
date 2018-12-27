@@ -49,7 +49,7 @@
     }
     
     
-    <div class="contentArea">
+    <div class="contentArea" id="contentArea">
       #get(content)
     </div>
     

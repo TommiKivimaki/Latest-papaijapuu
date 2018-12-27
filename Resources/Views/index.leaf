@@ -1,6 +1,6 @@
 #set("content") {
 
-<div class="indexContentArea" id="indexContentArea">
+<div class="indexContentArea">
   
   #if(messages) {
   <ul id="indexMessageList">
