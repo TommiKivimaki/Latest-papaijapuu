@@ -18,7 +18,8 @@ function sendHeight() {
   if (indexMessageList !== null && indexMessageList !== undefined) {
 //    let bodyHeight = document.body.scrollHeight
 //    let bodyHeight = $(document).height()
-    let bodyHeight = $("#contentArea").height()
+//    let bodyHeight = $("#contentArea").height()
+    let bodyHeight = $("#contentArea").css("height")
     let message = {height: bodyHeight}
     parent.postMessage(message,"*")
   }
